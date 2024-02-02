@@ -6,7 +6,8 @@ def f(i):
     if i == 1:
         D = DataDictionary().dataobject("ForestFires")
         GD = Grad_Descent(D)
-        print(GD.J(None))
+        theta = GD.theta()
+        print(GD.epoch())
 
 
 if __name__ == '__main__':
