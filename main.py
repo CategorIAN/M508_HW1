@@ -1,13 +1,13 @@
 from DataDictionary import DataDictionary
-from Grad_Descent import Grad_Descent
+from Regression import Regression
 
 
 def f(i):
     if i == 1:
-        D = DataDictionary().dataobject("ForestFires")
-        GD = Grad_Descent(D)
+        D = DataDictionary().dataobject("StudentPerformance")
+        GD = Regression(D)
         theta = GD.theta()
-        print(GD.epoch())
+        print(GD.stochastic_gd(alpha = 0.1))
 
 
 if __name__ == '__main__':

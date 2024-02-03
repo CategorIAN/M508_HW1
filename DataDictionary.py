@@ -8,54 +8,8 @@ class DataDictionary:
         return MLData(*self.metadata(name))
 
     def metadata(self, name):
-        if name == "SoyBean": return self.soybean()
         if name == "ForestFires": return self.forestfires()
-
-
-    def soybean(self):
-        name = "SoyBean"
-        file = 'raw_data/soybean-small.csv'
-        columns =  ['Date',  # For Soy Bean
-         'Plant-Stand',
-         'Precip',
-         'Temp',
-         'Hail',
-         'Crop-Hist',
-         'Area-Damaged',
-         'Severity',
-         'Seed-TMT',
-         'Germination',
-         'Plant-Growth',
-         'Leaves',
-         'Leafspots-Halo',
-         'Leafspots-Marg',
-         'Leafspot-Size',
-         'Leaf-Shread',
-         'Leaf-Malf',
-         'Leaf-Mild',
-         'Stem',
-         'Lodging',
-         'Stem-Cankers',
-         'Canker-Lesion',
-         'Fruiting-Bodies',
-         'External Decay',
-         'Mycelium',
-         'Int-Discolor',
-         'Sclerotia',
-         'Fruit-Pods',
-         'Fruit Spots',
-         'Seed',
-         'Mold-Growth',
-         'Seed-Discolor',
-         'Seed-Size',
-         'Shriveling',
-         'Roots',
-         'Class'  #Target
-         ]
-        replace = None
-        target_name = 'Class'
-        classification = True
-        return (name, file, columns, target_name, replace, classification)
+        if name == "StudentPerformance": return self.studentperformance()
 
     def forestfires(self):
         name = "ForestFires"
@@ -78,4 +32,22 @@ class DataDictionary:
         replace = None
         target_name = 'Area'
         classification = False
-        return (name, file, columns, target_name, replace, classification)
+        header = False
+        return (name, file, columns, target_name, replace, classification, header)
+
+    def studentperformance(self):
+        name = "StudentPerformance"
+        file = "raw_data/Student_Performance.csv"
+        columns = [
+            "Hours Studied",
+            "Previous Scores",
+            "Extracurricular Activities",
+            "Sleep Hours",
+            "Sample Question Papers Practiced",
+            "Performance Index" #Target
+        ]
+        replace = None
+        target_name = "Performance Index"
+        classification = False
+        header = True
+        return (name, file, columns, target_name, replace, classification, header)

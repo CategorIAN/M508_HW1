@@ -2,12 +2,15 @@ import pandas as pd
 import os
 
 class MLData:
-    def __init__(self, name, data_loc, columns, target_name, replace, classification):
+    def __init__(self, name, data_loc, columns, target_name, replace, classification, header):
         self.name = name
         self.data_loc = data_loc
-        self.df = pd.read_csv(self.data_loc, header=None)
         self.columns = columns
-        self.df.columns = self.columns
+        if header:
+            self.df = pd.read_csv(self.data_loc)
+        else:
+            self.df = pd.read_csv(self.data_loc, header=None)
+            self.df.columns = self.columns
         self.target_name = target_name
         target_column = self.df.pop(self.target_name)
         self.features = list(self.df.columns)
