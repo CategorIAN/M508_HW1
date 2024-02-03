@@ -1,22 +1,21 @@
 import pandas as pd
-import os
 
 class MLData:
     def __init__(self, name, data_loc, columns, target_name, replace, classification, header):
         self.name = name
         self.data_loc = data_loc
         self.columns = columns
+        self.target_name = target_name
+        self.replace = replace
+        self.classification = classification
         if header:
             self.df = pd.read_csv(self.data_loc)
         else:
             self.df = pd.read_csv(self.data_loc, header=None)
             self.df.columns = self.columns
-        self.target_name = target_name
         target_column = self.df.pop(self.target_name)
         self.features = list(self.df.columns)
         self.df.insert(len(self.df.columns), "Target", target_column)
-        self.replace = replace
-        self.classification = classification
         self.one_hot()
         self.z_score_normalize()
         self.classes = pd.Index(list(set(self.df["Target"]))) if self.classification else None
@@ -26,26 +25,8 @@ class MLData:
         return self.name
 
     '''
-        save: saves the dataframe to its folder with a given suffix
-    '''
-
-    def save(self, suffix=None):
-        self.df.to_csv(os.getcwd() + '\\' + str(self) + '\\' + "{}_{}.csv".format(str(self), suffix))
-
-    '''
-    readcsv: will take the location of the file and convert it to pandas
-    @return self.data - panda df of the csv for us to work with
-    '''
-
-    def readcsv(self):
-        dn = self.data_loc
-        self.df = pd.read_csv(dn)  # read the data location to pandas dataframe
-        return self.df
-
-    '''
     one_hot: transforms data by doing one hot encoding
     '''
-
     def one_hot(self):
         (features_numerical, features_categorical) = ([], [])
         features_categorical_ohe = []
@@ -70,7 +51,6 @@ class MLData:
     '''
     z_score_normalize: normalizes the data by applying the z score
     '''
-
     def z_score_normalize(self):
         for col in self.features_ohe:
             std = self.df[col].std()  # computes standard deviation
