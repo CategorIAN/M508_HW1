@@ -49,10 +49,11 @@ class Regression:
         index = random.sample(list(self.data.df.index), k=n)
         return go(start_theta, 0)
 
-    def stochastic_gd(self, alpha, start_theta = None):
+    def stochastic_gd(self, alpha, start_theta = None, singleRun = False):
         '''
         :param alpha: the learning rate
         :param start_theta: starting regression weights
+        :param singleRun: finds regression weights after one epoch
         :return: trained vector of regression weights
         '''
         def evaluate(theta = None, prev_error = None, prev_theta = None):
@@ -71,7 +72,7 @@ class Regression:
                         return evaluate(theta = new_theta, prev_error = error, prev_theta = theta)
                     else:
                         return prev_theta
-        return evaluate()
+        return self.epoch(alpha, start_theta) if singleRun else evaluate()
 
 
 
