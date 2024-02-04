@@ -28,6 +28,7 @@ class Analysis:
         '''
         :param alphas: a list of learning rates to tune
         :param singleRun: finds regression weights after one epoch
+        :param figure: displays a scatterplot of Error vs. Learning Rate
         :return: a dataframe that relates learning rate to error from learning rate
         '''
         rows = pd.Series(alphas).map(lambda hyp: (hyp, self.error(hyp, singleRun)))

@@ -11,7 +11,7 @@ def f(i):
     if i == 2:
         D = DataDictionary().dataobject("StudentPerformance")
         A = Analysis(D)
-        A.getErrorDf(alphas = np.linspace(0.02, 0.3, 15), singleRun = True, figure = True)
+        A.getErrorDf(alphas = [0.02 * i for i in range(1, 15 + 1)], singleRun = True, figure = True)
 
 if __name__ == '__main__':
     f(2)
