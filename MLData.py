@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from functools import reduce
+from sklearn.model_selection import train_test_split
 
 class MLData:
     def __init__(self, name, data_loc, columns, target_name, classification, header):
@@ -21,6 +22,8 @@ class MLData:
         self.classes = pd.Index(list(set(self.df["Target"]))) if self.classification else None
         if not classification: self.df["Target"].apply(pd.to_numeric)
         self.df.to_csv("\\".join([os.getcwd(), self.name, "{}_Cleaned.csv".format(self.name)]))
+        self.X_train, self.X_test, self.Y_train, self.Y_test = (
+            train_test_split(self.df.loc[:, self.feats_enc], self.df.loc[:, ["Target"]], test_size=0.3, random_state=1))
 
     def __str__(self):
         return self.name

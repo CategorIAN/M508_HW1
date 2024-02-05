@@ -10,7 +10,7 @@ def f(i):
     if i == 2:
         D = DataDictionary().dataobject("StudentPerformance")
         A = Analysis(D)
-        A.getErrorDf(alphas = [0.0001 * i for i in range(1, 15 + 1)], singleRun = True, figure = True)
+        A.getErrorDf(alphas = [0.00001 * i for i in range(1, 15 + 1)], singleRun = True, figure = True)
     if i == 3:
         D = DataDictionary().dataobject("StudentPerformance")
         print(D.feats_num)
