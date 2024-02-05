@@ -1,4 +1,5 @@
 from MLData import MLData
+import os
 
 class DataDictionary:
     def __init__(self):
@@ -13,7 +14,7 @@ class DataDictionary:
 
     def forestfires(self):
         name = "ForestFires"
-        file = 'raw_data/forestfires.csv'
+        file = "raw_data/forestfires.csv"
         columns = [
           'X', # For Forest Fires
           'Y',
@@ -29,11 +30,10 @@ class DataDictionary:
           'Rain',
           'Area'  #Target
         ]
-        replace = None
         target_name = 'Area'
         classification = False
         header = False
-        return (name, file, columns, target_name, replace, classification, header)
+        return (name, file, columns, target_name, classification, header)
 
     def studentperformance(self):
         name = "StudentPerformance"
@@ -46,8 +46,7 @@ class DataDictionary:
             "Sample Question Papers Practiced",
             "Performance Index" #Target
         ]
-        replace = None
         target_name = "Performance Index"
         classification = False
         header = True
-        return (name, file, columns, target_name, replace, classification, header)
+        return (name, file, columns, target_name, classification, header)

@@ -5,7 +5,7 @@ import random
 class Regression:
     def __init__(self, data):
         self.data = data
-        self.M = self.data.df.loc[:, self.data.features_ohe].to_numpy()
+        self.M = self.data.df.loc[:, self.data.feats_enc].to_numpy()
         self.y = self.data.df.loc[:, ["Target"]].to_numpy()
 
     def J(self, theta):
@@ -43,7 +43,7 @@ class Regression:
             else:
                 new_theta = theta_update_func(theta, index[i])
                 return go.tail_call(new_theta, i + 1)
-        start_theta = np.random.rand(len(self.data.features_ohe)) if start_theta is None else start_theta
+        start_theta = np.random.rand(len(self.data.feats_enc)) if start_theta is None else start_theta
         theta_update_func = self.theta_update(alpha)
         n = self.M.shape[0]
         index = random.sample(list(self.data.df.index), k=n)
