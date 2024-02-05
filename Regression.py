@@ -52,7 +52,7 @@ class Regression:
         start_theta = np.random.rand(1 + len(self.data.feats_enc)) if start_theta is None else start_theta
         theta_update_func = self.theta_update(alpha)
         n = self.X_train_mat.shape[0]
-        index = random.sample(list(self.data.X_train.index), k=n)
+        index = random.sample(range(n), k=n)
         return go(start_theta, 0)
 
     def stochastic_gd(self, alpha, start_theta = None, singleRun = False):

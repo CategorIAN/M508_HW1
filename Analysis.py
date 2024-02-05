@@ -20,7 +20,7 @@ class Analysis:
         start_time = time.time()
         theta = self.reg.stochastic_gd(alpha, singleRun = singleRun)
         result = (self.reg.J(self.reg.X_test_mat, self.reg.Y_test_vec, theta),) + tuple(theta)
-        print("Error: {}".format(result))
+        print("Error: {}".format(result[0]))
         print("Time Elapsed: {} Seconds".format(time.time() - start_time))
         return result
 
@@ -42,6 +42,24 @@ class Analysis:
             plt.ylabel("J Error")
             plt.title("J Error vs. Learning Rate")
             plt.show()
+            #---------------------------------------------------------------------------------------------
+            plt.scatter(error_df["Alpha"][:40], error_df["Error"][:40], **{'color': 'green', 'marker': 'o'})
+            plt.xlabel("Learning Rate")
+            plt.ylabel("J Error")
+            plt.title("J Error vs. Learning Rate")
+            plt.show()
+            # ---------------------------------------------------------------------------------------------
+            plt.scatter(error_df["Alpha"][:30], error_df["Error"][:30], **{'color': 'red', 'marker': 'o'})
+            plt.xlabel("Learning Rate")
+            plt.ylabel("J Error")
+            plt.title("J Error vs. Learning Rate")
+            plt.show()
         return error_df
+
+    def best_param(self, error_df):
+        min_error = error_df["Error"].min()
+        best_row = error_df.loc[lambda df: df["Error"] == min_error].iloc[0]
+        best_row.to_csv("\\".join([os.getcwd(), str(self.data), "{}_Best.csv".format(str(self.data))]))
+        return best_row["Alpha"]
 
 

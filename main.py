@@ -10,13 +10,8 @@ def f(i):
     if i == 2:
         D = DataDictionary().dataobject("StudentPerformance")
         A = Analysis(D)
-        A.getErrorDf(alphas = [0.00001 * i for i in range(1, 15 + 1)], singleRun = True, figure = True)
-    if i == 3:
-        D = DataDictionary().dataobject("StudentPerformance")
-        print(D.feats_num)
-        print(D.feats_binary)
-        print(D.feats_cat)
-        print(D.df.head())
+        df = A.getErrorDf(alphas = [0.00001 * i for i in range(1, 50 + 1)], singleRun = True, figure = True)
+        print(A.best_param(df))
 
 if __name__ == '__main__':
     f(2)
